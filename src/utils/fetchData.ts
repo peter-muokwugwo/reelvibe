@@ -1,3 +1,4 @@
+import type { Movie } from "../App";
 import { updateSearchCount } from "./updateSearchCount";
 
 
@@ -12,7 +13,7 @@ const API_OPTIONS = {
 };
 
 
-export async function fetchData(searchTerm: string = '') {
+export async function fetchData(searchTerm: string = ''): Promise<Movie[]> {
     try {
         const endpoint = searchTerm
         ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(searchTerm)}`
@@ -25,16 +26,25 @@ export async function fetchData(searchTerm: string = '') {
         }
 
         const data = await response.json();
+        const movieData: Movie[] = data.results.map((movie: any) => ({
+            id: movie.id,
+            title: movie.title,
+            posterPath: movie.poster_path,
+            overview: movie.overview,
+            releaseDate: movie.release_date,
+            voteAverage: movie.vote_average,
+            originalLanguage: movie.original_language,
+            searchTerm,
+        }))
 
-        if (searchTerm && data.results.length > 0) {
-            await updateSearchCount(searchTerm, data.results[0])
+        if (searchTerm && movieData.length > 0) {
+            await updateSearchCount(searchTerm, movieData[0])
         }
-        console.log(data.results);
 
-        return data.results;
+        return movieData;
         
     } catch (error) {
         console.error("Error fetching movies:", error);
-        
+        return [];
     }
 }
