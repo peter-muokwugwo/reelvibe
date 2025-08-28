@@ -1,15 +1,11 @@
 import React from 'react'
-
+import type { Movie } from '../App'
 
 interface MovieCardProps {
-    title: string;
-    posterPath: string;
-    releaseDate: string;
-    voteAverage: number;
-    originalLanguage: string;
+    movie: Movie;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ title, posterPath, releaseDate, voteAverage, originalLanguage}) => {
+const MovieCard: React.FC<MovieCardProps> = ({movie: {title, posterPath, releaseDate, voteAverage, originalLanguage}}) => {
   return (
     <div className='movie-card'>
         <img
@@ -29,6 +25,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ title, posterPath, releaseDate, v
                     alt='rating star'
                     />
                     <p>{voteAverage ? voteAverage.toFixed(1) : 'N/A'}</p>
+            </div>
+
+             <div>
+                <span>.</span>
+                <p>{originalLanguage}</p>
             </div>
 
             <div>
