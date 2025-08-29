@@ -2,7 +2,7 @@ import { Query } from "appwrite";
 import { appwriteConfig, databases } from "../appwrite/config";
 import type { Movie } from "../App";
 
-export async function getTrendingMovies(): Promise<Movie[]> {
+export async function getTrendingMovies() {
     try {
         const response = await databases.listDocuments(
             appwriteConfig.DATABASE_ID,
@@ -11,11 +11,13 @@ export async function getTrendingMovies(): Promise<Movie[]> {
         )
 
         const movies: Movie[] = response.documents.map((doc) => ({
-            id: doc.$id,
-            title: doc.title,
+            id: doc.movie_id,
+            title: doc.searchTerm || 'Unknown',
             posterPath: doc.poster_path,
-            overview: doc.overview,
-            releaseDate: doc.realse_date,
+            overview: '',
+            releaseDate: '',
+            voteAverage: 0,
+            originalLanguage: ''
         }));
 
         return movies;
