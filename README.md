@@ -1,69 +1,83 @@
-# React + TypeScript + Vite
+# 🎬 ReelVibe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **ReelVibe**, a simple and fun app to discover movies you'll actually enjoy. Search for your favorites, explore trending films, and enjoy a smooth, clean interface, no hassle, no clutter. 
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ What You Can Do
 
-## Expanding the ESLint configuration
+-  **Search Movies:** Quickly find your favorite films with the search bar.  
+-  **Trending Movies:** See what’s popular right now.  
+-  **Movie Details:** Check ratings, release year, language, and more.  
+-  **Track Searches:** Appwrite keeps track of popular searches automatically.  
+-  **Smooth Experience:** Debounced search for faster, smarter results.  
+-  **Clean UI:** Polished design for a pleasant browsing experience.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 How It Works
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Header:** Displays the logo, hero image, and a tagline.  
+- **Search:** Type to find movies.  
+- **Movie Cards:** Shows movie poster, title, rating, year, and language.  
+- **Trending Section:** Highlights movies that users are searching for the most.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 💻 Built With
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React + TypeScript** – Frontend  
+- **Tailwind CSS** – Styling  
+- **Appwrite** – Backend & database for trending searches  
+- **TMDb API** – Movie data  
+- **use-debounce** – Optimized search input
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🔧 Utilities
+
+- `fetchData` – Gets movies from TMDb API based on search or popularity.  
+- `getTrendingMovies` – Fetches top trending movies from Appwrite.  
+- `updateSearchCount` – Updates the number of times a movie has been searched.
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repo:**  
+   ```bash
+   git clone https://github.com/your-username/reelvibe.git
+   ```
+
+2. **Install dependencies:**  
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Add your TMDb API key:**  
+   Create a `.env` file in the root folder with:  
+   ```env
+   VITE_TMDB_API_KEY=your_tmdb_api_key
+   ```
+
+4. **Start the app:**  
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+---
+
+
+## Author
+
+@peter-muokwugwo
+---
+
+## 📜 License
+
+MIT License © 2025
+
