@@ -18,20 +18,14 @@ export interface Movie {
   releaseDate?: string;
 }
 
-interface State {
-  movies: Movie[];
-  trendingMovies: Movie[];
-  error: string | null;
-  isLoading: boolean;
-}
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [search, setSearchTerm] = useState<string>('');
   const [movies, setMovies] = useState<Movie[]>([]);
   const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [debouncedSearch] = useDebounce(searchTerm, 1000);
+  const [debouncedSearch] = useDebounce(search, 1000);
 
 
   const loadingTrendingMovies = async () => {
@@ -42,7 +36,7 @@ const App = () => {
       return movies;
     } catch (error) {
       console.error(`Failed to load trending movies: ${error}`);
-      
+
     }
   };
 
@@ -51,11 +45,11 @@ const App = () => {
       setIsLoading(true);
 
       try {
-        const movies = await fetchData();
+        const movies = await fetchData(debouncedSearch);
         setMovies(movies);
       } catch (error) {
         console.error(`Failed to load movies: ${error}`);
-        
+
       } finally {
         setIsLoading(false);
       }
@@ -70,11 +64,12 @@ const App = () => {
 
   return (
     <main>
+      <div className='pattern' />
       <Header />
       <section id='search'>
-        <Search 
-        search={searchTerm}
-        setSearch={setSearchTerm}
+        <Search
+          search={search}
+          setSearch={setSearchTerm}
         />
       </section>
       {trendingMovies.length > 0 && (
@@ -86,16 +81,16 @@ const App = () => {
               <li key={movie.id}>
                 <p>{i + 1}</p>
 
-                <img 
+                <img
                   src={movie.posterPath}
                   alt={movie.searchTerm}
-                  />
+                />
               </li>
             ))}
           </ul>
         </section>
       )}
-      <section id='all-movie'>
+      <section id='all-movies'>
         <h2>All Reels</h2>
         {isLoading ? (
           <p>Loading...</p>
@@ -107,7 +102,7 @@ const App = () => {
               <MovieCard
                 key={movie.id}
                 movie={movie}
-                />
+              />
             ))}
           </ul>
         )}
